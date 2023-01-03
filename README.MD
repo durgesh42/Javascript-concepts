@@ -1,4 +1,5 @@
-# Comparison of async.waterfall, async.series, and async/await 
+# async.waterfall, async.series VS async & await 
+___
 
 <b style="color:White;font-size:14px">Date :- &nbsp; 3 : Jan : 23</b>
 
@@ -95,3 +96,33 @@ asyncWaterfall().then((result) => {
 - Async.waterfall is a good choice if you need to perform a series of operations where the output of each function is needed as the input for the next, and you don't need to wait for any of the functions to complete before starting the next one. 
   
 - It can also be easier to read than async/await code in some cases, since the flow of the code is more linear.
+
+
+
+&nbsp;
+
+
+# Object.assign()
+___
+
+
+<b style="color:White;font-size:14px">Date :- &nbsp; 3 : Jan : 23</b>
+
+
+- The ```Object.assign()``` method is used to copy the values and properties from one or more source objects to a target object. 
+  
+- It invokes getters and setters since it uses both [[Get]] on the source and [[Set]] on the target. 
+  
+- It returns the target object which has properties and values copied from the source object. Object.assign() does not throw on null or undefined source values. 
+
+
+<strong>Syntax:</strong>
+
+```
+Object.assign(target, ...sources)
+Parameters: 
+```
+
+- <strong>target:</strong> It is the target object to which values and properties have to be copied.
+- <strong>Sources:</strong> It is the source object from which values and properties have to be copied.
+- <strong>Return Value:</strong> Object.assign() returns the target object.
