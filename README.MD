@@ -118,7 +118,7 @@ ___
 
 <strong>Syntax:</strong>
 
-```
+```javascript
 Object.assign(target, ...sources)
 Parameters: 
 ```
@@ -126,3 +126,88 @@ Parameters:
 - <strong>target:</strong> It is the target object to which values and properties have to be copied.
 - <strong>Sources:</strong> It is the source object from which values and properties have to be copied.
 - <strong>Return Value:</strong> Object.assign() returns the target object.
+
+
+&nbsp;
+
+
+# async.parallel()
+___
+
+
+<b style="color:White;font-size:14px">Date :- &nbsp; 9 : Jan : 23</b>
+
+```javascript
+import async from "async";
+
+// an example using an object instead of an array
+async.parallel(
+  {
+    one: function (callback) {
+      callback("unable to execute");
+    },
+    two: function (callback) {
+      callback(null, "two");
+    },
+    three: function (callback) {
+      callback(null, 3);
+    },
+  },
+  function (err, results) {
+    if (err) console.log(err);
+    console.log(results);
+  }
+);
+
+
+
+async.parallel(
+  [
+    function (callback) {
+      callback(null, 1);
+    },
+    function (callback) {
+      callback(null, 2);
+    },
+    function (callback) {
+      callback("unable to execute");
+    },
+    function (callback) {
+      callback(null, 4);
+    },
+  ],
+  function (err, results) {
+    if (err) console.log(err);
+    console.log(results);
+  }
+);
+
+```
+
+
+
+- `async.parallel()` is a utility function from the async library that allows us to run multiple functions in parallel and collect their results.
+
+- The `async.parallel()` function takes two arguments:
+  - An object that maps the names of the functions you want to run in parallel to the functions themselves
+  - A callback function that will be called once all of the functions have completed or if an error occur.
+  - In place of sending a object that maps we can send array of functions also.
+
+1. In this example, the `async.parallel()` function is being passed an object that contains four functions: one, two, three, four.
+
+2. <b>These functions all take a single argument, which is a callback function. When a function is done executing, it should call this callback function, passing in any errors as the first argument and any results as the second argument.</b>
+
+- In the case of one function, it calls the callback with the string "unable to execute" as the error argument, and two calls the callback with null and the string "two" as the result. three and four are similar and they call the callback with null and 3 and "four" respectively.
+
+- Once all of these functions have completed or if an error occur, the final callback function that was passed as the second argument to async.parallel() will be called. This callback takes two arguments: an error and a results object.
+
+- <b>If any of the parallel functions passed an error to its callback, then the error argument passed to the final callback will be the error passed by the first function that was passed an error.</b>
+
+-  <b>If all the parallel functions passed null as the first argument to the callback function, then the error argument will be null.</b>
+
+- <bold style="color:red">The results object that is passed as the second argument to the final callback is an object that contains the results from all of the functions that were passed to async.parallel(), with the keys being the names of the functions and the values being the results passed to the callback functions</bold>
+
+
+- In this example, the function three calls its callback with an error "unable to execute", as soon as this error is passed to the callback, async.parallel invokes the final callback and passes the error "unable to execute" to it, thus halting the execution of any remaining functions in the parallel set.'
+
+- As a result, the final callback function that was passed as the second argument to async.parallel() will be called with err set to the string "unable to execute" and results set to an object containing the results of the completed function `{ one: 1, two: 2, three: undefined }.`
